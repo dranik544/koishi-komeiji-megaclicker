@@ -1,0 +1,59 @@
+[gd_scene load_steps=3 format=3 uid="uid://b8l2mipxeicdn"]
+
+[ext_resource type="Script" uid="uid://cagi1ysst26ce" path="res://settings.gd" id="1_x2hje"]
+[ext_resource type="Texture2D" uid="uid://cdjw0233vhmvt" path="res://fumo1.png" id="2_nkug2"]
+
+[node name="settings" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_x2hje")
+
+[node name="bg" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.202168, 0.34979, 0.321992, 1)
+
+[node name="vbox" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 220.0
+offset_bottom = 64.0
+
+[node name="annoyingevents" type="CheckButton" parent="vbox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+button_pressed = true
+text = "Enable annoying events"
+
+[node name="madness" type="CheckButton" parent="vbox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+text = "MADNESS AND CHAOS"
+
+[node name="hbox" type="HBoxContainer" parent="vbox"]
+layout_mode = 2
+
+[node name="exit" type="Button" parent="vbox/hbox"]
+layout_mode = 2
+text = "Exit"
+
+[node name="continue" type="Button" parent="vbox/hbox"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Continue"
+
+[node name="koishi lol" type="TextureRect" parent="vbox"]
+layout_mode = 2
+texture = ExtResource("2_nkug2")
+
+[connection signal="pressed" from="vbox/annoyingevents" to="." method="_on_annoyingevents_pressed"]
+[connection signal="pressed" from="vbox/madness" to="." method="_on_madness_pressed"]
+[connection signal="pressed" from="vbox/hbox/exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="vbox/hbox/continue" to="." method="_on_continue_pressed"]
