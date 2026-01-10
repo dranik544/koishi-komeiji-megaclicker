@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://0a0xr416hfvi"]
+
+[ext_resource type="Script" uid="uid://03pw0vheru26" path="res://fullscreen_screamer.gd" id="1_nn0il"]
+[ext_resource type="Texture2D" uid="uid://bb8hrfgn40lb8" path="res://icon.svg" id="1_rn7q0"]
+[ext_resource type="AudioStream" uid="uid://gpqi8ooyrf5a" path="res://udar-ot-vzgliada-skaly.mp3" id="3_1o2c4"]
+
+[node name="fullscreen screamer" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_nn0il")
+
+[node name="texture" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_rn7q0")
+expand_mode = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_1o2c4")
+autoplay = true

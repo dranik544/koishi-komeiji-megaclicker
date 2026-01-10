@@ -4,9 +4,13 @@ extends Node
 signal addpoint(num: int)
 var points: int = 0
 var savepath = "user://points.sdb"
+var customfumopath = "user://customfumo.png"
 
 var annoyingevents = true
 var madness = false
+var transparentbg: bool = true
+var customfumo: bool = false
+var timebeforeevent: float = 240.0
 
 
 func savepoints():
@@ -19,6 +23,18 @@ func loadpoints():
 		savepoints()
 		return
 	points = file.get_var(points)
+
+func loadcustomfumo():
+	var image = Image.new()
+	
+	if image.load(customfumopath) == OK:
+		var texture = ImageTexture.create_from_image(image)
+		return texture
+	else:
+		return null
+
+func hascustomfumo():
+	return FileAccess.file_exists(customfumopath)
 
 func _ready() -> void:
 	loadpoints()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://ellvh0f4tp58"]
+[gd_scene load_steps=19 format=3 uid="uid://ellvh0f4tp58"]
 
 [ext_resource type="Script" uid="uid://bok8fheaeuima" path="res://core.gd" id="1_l5qv6"]
 [ext_resource type="Texture2D" uid="uid://cdjw0233vhmvt" path="res://fumo1.png" id="1_tvpqx"]
@@ -13,6 +13,8 @@
 [ext_resource type="AudioStream" uid="uid://bkjivtqyhud11" path="res://boing.mp3" id="9_poonc"]
 [ext_resource type="AudioStream" uid="uid://skkdf66efnvf" path="res://falling.mp3" id="10_poonc"]
 [ext_resource type="AudioStream" uid="uid://bscuvc7f3rhpo" path="res://AHH POOP SOUND.mp3" id="11_efppl"]
+[ext_resource type="AudioStream" uid="uid://bxai8p2gw4n5n" path="res://baby-laughing-meme.mp3" id="12_l7hdw"]
+[ext_resource type="AudioStream" uid="uid://br3nxf1s52fyn" path="res://fart1.mp3" id="13_s7uu3"]
 
 [sub_resource type="Animation" id="Animation_efppl"]
 length = 0.001
@@ -252,13 +254,24 @@ script = ExtResource("1_l5qv6")
 position = Vector2(112, 112)
 script = ExtResource("2_05t4c")
 
-[node name="fumospritebg" type="Sprite2D" parent="CanvasLayer/fumo"]
+[node name="fumospritebg" type="TextureRect" parent="CanvasLayer/fumo"]
 modulate = Color(0, 0, 0, 0.490196)
-position = Vector2(-10, 10)
+offset_left = -106.0
+offset_top = -90.0
+offset_right = 94.0
+offset_bottom = 110.0
+pivot_offset = Vector2(100, 100)
 texture = ExtResource("1_tvpqx")
+expand_mode = 1
 
-[node name="fumosprite" type="Sprite2D" parent="CanvasLayer/fumo"]
+[node name="fumosprite" type="TextureRect" parent="CanvasLayer/fumo"]
+offset_left = -96.0
+offset_top = -100.0
+offset_right = 104.0
+offset_bottom = 100.0
+pivot_offset = Vector2(100, 100)
 texture = ExtResource("1_tvpqx")
+expand_mode = 1
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CanvasLayer/fumo"]
 position = Vector2(-40, -25)
@@ -305,6 +318,12 @@ stream = ExtResource("10_poonc")
 
 [node name="AudioStreamPlayer6" type="AudioStreamPlayer" parent="CanvasLayer/fumo"]
 stream = ExtResource("11_efppl")
+
+[node name="AudioStreamPlayer7" type="AudioStreamPlayer" parent="CanvasLayer/fumo"]
+stream = ExtResource("12_l7hdw")
+
+[node name="AudioStreamPlayer8" type="AudioStreamPlayer" parent="CanvasLayer/fumo"]
+stream = ExtResource("13_s7uu3")
 
 [node name="Label" type="Label" parent="CanvasLayer"]
 anchors_preset = 15

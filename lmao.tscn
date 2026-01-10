@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://1omemjnr6wg4"]
+
+[ext_resource type="Script" uid="uid://yxjfkkrw808v" path="res://lmao.gd" id="1_djiu1"]
+[ext_resource type="Texture2D" uid="uid://3gpc8yka2wk3" path="res://ops1.png" id="1_ubql0"]
+[ext_resource type="AudioStream" uid="uid://dn7unscswof8r" path="res://ops1.mp3" id="3_nex3a"]
+[ext_resource type="AudioStream" uid="uid://dmc65wyjbf61h" path="res://drill-sound.mp3" id="4_rgmvs"]
+
+[node name="lmao" type="Node2D"]
+script = ExtResource("1_djiu1")
+
+[node name="Button" type="Button" parent="."]
+offset_left = -3.0
+offset_top = -3.0
+offset_right = 230.0
+offset_bottom = 230.0
+pivot_offset = Vector2(116, 116)
+icon = ExtResource("1_ubql0")
+flat = true
+icon_alignment = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_nex3a")
+autoplay = true
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_rgmvs")
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

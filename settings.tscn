@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://b8l2mipxeicdn"]
+[gd_scene load_steps=4 format=3 uid="uid://b8l2mipxeicdn"]
 
 [ext_resource type="Script" uid="uid://cagi1ysst26ce" path="res://settings.gd" id="1_x2hje"]
 [ext_resource type="Texture2D" uid="uid://cdjw0233vhmvt" path="res://fumo1.png" id="2_nkug2"]
+[ext_resource type="AudioStream" uid="uid://vryga3kdpgyi" path="res://evil hahaha.mp3" id="3_3ykye"]
 
 [node name="settings" type="Control"]
 layout_mode = 3
@@ -19,41 +20,116 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.202168, 0.34979, 0.321992, 1)
+color = Color(0.168627, 0.219608, 0.168627, 1)
 
-[node name="vbox" type="VBoxContainer" parent="."]
-layout_mode = 0
-offset_right = 220.0
-offset_bottom = 64.0
+[node name="scroll" type="ScrollContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="annoyingevents" type="CheckButton" parent="vbox"]
+[node name="vbox" type="VBoxContainer" parent="scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ver" type="RichTextLabel" parent="scroll/vbox"]
+layout_mode = 2
+bbcode_enabled = true
+text = "
+[tornado]KOISHI MEGACLIKER
+[shake]ver12
+
+"
+fit_content = true
+horizontal_alignment = 1
+
+[node name="timebeforeeventstext" type="RichTextLabel" parent="scroll/vbox"]
+layout_mode = 2
+bbcode_enabled = true
+text = "Time before event: ???"
+fit_content = true
+
+[node name="timebeforeevents" type="HSlider" parent="scroll/vbox"]
+layout_mode = 2
+max_value = 820.0
+step = 0.1
+value = 240.0
+
+[node name="annoyingevents" type="CheckButton" parent="scroll/vbox"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 15
 button_pressed = true
 text = "Enable annoying events"
 
-[node name="madness" type="CheckButton" parent="vbox"]
+[node name="madness" type="CheckButton" parent="scroll/vbox"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 15
-text = "MADNESS AND CHAOS"
+text = "MADNESS AND CHAOS
+(please dont turn on)"
 
-[node name="hbox" type="HBoxContainer" parent="vbox"]
+[node name="transparent" type="CheckButton" parent="scroll/vbox"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 15
+button_pressed = true
+text = "Transparent BG"
 
-[node name="exit" type="Button" parent="vbox/hbox"]
+[node name="customfumo" type="CheckButton" parent="scroll/vbox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+text = "Enable custom Fumo"
+icon_alignment = 2
+expand_icon = true
+
+[node name="opencustomfumodir" type="Button" parent="scroll/vbox"]
+layout_mode = 2
+text = "Open custom fumo dir"
+
+[node name="fumopath" type="RichTextLabel" parent="scroll/vbox"]
+layout_mode = 2
+bbcode_enabled = true
+text = "status custom fumo"
+fit_content = true
+
+[node name="koishi lol" type="TextureRect" parent="scroll/vbox"]
+layout_mode = 2
+texture = ExtResource("2_nkug2")
+expand_mode = 4
+
+[node name="hi" type="RichTextLabel" parent="scroll/vbox"]
+layout_mode = 2
+bbcode_enabled = true
+text = "[shake][wave][rainbow]hi lol
+
+
+"
+fit_content = true
+
+[node name="hbox" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -31.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="exit" type="Button" parent="hbox"]
 layout_mode = 2
 text = "Exit"
 
-[node name="continue" type="Button" parent="vbox/hbox"]
+[node name="continue" type="Button" parent="hbox"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Continue"
 
-[node name="koishi lol" type="TextureRect" parent="vbox"]
-layout_mode = 2
-texture = ExtResource("2_nkug2")
+[node name="MUHAHAHAHAH" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_3ykye")
+volume_db = 2.0
+pitch_scale = 1.2
 
-[connection signal="pressed" from="vbox/annoyingevents" to="." method="_on_annoyingevents_pressed"]
-[connection signal="pressed" from="vbox/madness" to="." method="_on_madness_pressed"]
-[connection signal="pressed" from="vbox/hbox/exit" to="." method="_on_exit_pressed"]
-[connection signal="pressed" from="vbox/hbox/continue" to="." method="_on_continue_pressed"]
+[connection signal="pressed" from="hbox/exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="hbox/continue" to="." method="_on_continue_pressed"]

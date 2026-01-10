@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://vryga3kdpgyi"
+path="res://.godot/imported/evil hahaha.mp3-0d32835c1424c48c9b1e961f125aafe0.mp3str"
+
+[deps]
+
+source_file="res://evil hahaha.mp3"
+dest_files=["res://.godot/imported/evil hahaha.mp3-0d32835c1424c48c9b1e961f125aafe0.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

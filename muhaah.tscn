@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://bu7ej7vx17qss"]
+
+[ext_resource type="Texture2D" uid="uid://bbinw6y402ni4" path="res://muhahahahah1.png" id="1_ds264"]
+[ext_resource type="Script" uid="uid://c55hli3bjxhrh" path="res://muhaah.gd" id="1_p8dp5"]
+
+[node name="muhaah" type="Node2D"]
+script = ExtResource("1_p8dp5")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 225.0
+offset_bottom = 225.0
+texture = ExtResource("1_ds264")
+expand_mode = 1

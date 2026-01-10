@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://dcsccryrwmmxk"]
+
+[ext_resource type="Script" uid="uid://c3r4joutlagt0" path="res://fart.gd" id="1_3ugn3"]
+[ext_resource type="Texture2D" uid="uid://b0hm86dg7a0x4" path="res://fart1.png" id="2_m1w3q"]
+
+[node name="fart" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3ugn3")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_m1w3q")
+expand_mode = 1

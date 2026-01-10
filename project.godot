@@ -12,6 +12,7 @@ config_version=5
 
 config/name="Koishi Komeiji MEGACLICKER"
 config/version="1.0.0.0"
+config/tags=PackedStringArray("2d", "desktoppet", "dranik544", "touhou")
 run/main_scene="uid://b8l2mipxeicdn"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="uid://cdjw0233vhmvt"
@@ -84,5 +85,7 @@ DOWN={
 
 [rendering]
 
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
 environment/defaults/default_clear_color=Color(0.301961, 0.301961, 0.301961, 0)
 viewport/transparent_background=true
