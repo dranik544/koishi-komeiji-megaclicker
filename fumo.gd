@@ -19,8 +19,8 @@ func apply_settings():
 	if Global.madness:
 		$Timer.wait_time = 3
 	else:
-		$Timer.wait_time = 2
-		#$Timer.wait_time = randf_range(10.0 + Global.timebeforeevent, 15.0 + Global.timebeforeevent * 1.25)
+		#$Timer.wait_time = 2
+		$Timer.wait_time = randf_range(10.0 + Global.timebeforeevent, 15.0 + Global.timebeforeevent * 1.25)
 	$Timer.start()
 
 func _ready():
@@ -86,7 +86,7 @@ func _on_timer_timeout() -> void:
 	isevent = true
 	var randomevent
 	if !Global.madness:
-		randomevent = randi_range(11, 11)
+		randomevent = randi_range(1, 11)
 	else:
 		if get_window().has_meta("copy") and get_window().get_meta("copy"):
 			var events = [1, 3, 4, 6, 7, 8, 9, 10]
