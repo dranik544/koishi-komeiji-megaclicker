@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://ellvh0f4tp58"]
+[gd_scene load_steps=22 format=3 uid="uid://ellvh0f4tp58"]
 
 [ext_resource type="Script" uid="uid://bok8fheaeuima" path="res://core.gd" id="1_l5qv6"]
 [ext_resource type="Texture2D" uid="uid://cdjw0233vhmvt" path="res://fumo1.png" id="1_tvpqx"]
@@ -6,6 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://r3e4mmxyihrr" path="res://run.mp3" id="5_6sogb"]
 [ext_resource type="Script" uid="uid://cvh32xotqvxd2" path="res://counter.gd" id="5_nji8p"]
 [ext_resource type="Script" uid="uid://daktv33rfrvke" path="res://button.gd" id="6_macrm"]
+[ext_resource type="Texture2D" uid="uid://dwv31hijcrg8p" path="res://zametka.png" id="6_ymtr0"]
 [ext_resource type="Texture2D" uid="uid://c3x0ao7mvsjf8" path="res://paint1.png" id="7_v2s1a"]
 [ext_resource type="Texture2D" uid="uid://fhm2bd3ko8cc" path="res://koishiart6.png" id="8_fpp5w"]
 [ext_resource type="AudioStream" uid="uid://b70p6o57q8cyj" path="res://tada1.mp3" id="8_in0ky"]
@@ -15,6 +16,7 @@
 [ext_resource type="AudioStream" uid="uid://bscuvc7f3rhpo" path="res://AHH POOP SOUND.mp3" id="11_efppl"]
 [ext_resource type="AudioStream" uid="uid://bxai8p2gw4n5n" path="res://baby-laughing-meme.mp3" id="12_l7hdw"]
 [ext_resource type="AudioStream" uid="uid://br3nxf1s52fyn" path="res://fart1.mp3" id="13_s7uu3"]
+[ext_resource type="AudioStream" uid="uid://b56wpii3e8wja" path="res://zametka.mp3" id="14_jlbvb"]
 
 [sub_resource type="Animation" id="Animation_efppl"]
 length = 0.001
@@ -125,6 +127,30 @@ tracks/8/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("zametka:modulate")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("zametka:rotation")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
 }
 
 [sub_resource type="Animation" id="Animation_poonc"]
@@ -239,10 +265,75 @@ tracks/8/keys = {
 "values": [true]
 }
 
+[sub_resource type="Animation" id="Animation_mnp4h"]
+resource_name = "zametka"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("zametka:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 4.5, 5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("zametka:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2, 2.25, 2.5, 2.75, 3, 3.25, 4.5, 5.03333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.4, 1),
+"update": 0,
+"values": [0.0, 0.0, 0.0349066, -0.0349066, 0.0349066, -0.0349066, 0.0349066, -0.0349066, 0.0349066, -0.139626, -0.0349066, 0.0349066, -0.0349066, -0.0349066, -3.79609]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("paint:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2, 2.25, 2.5, 2.75, 3, 3.25),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, -0.139626, -0.0785398, 0.0, 0.322886, -0.0785398, 0.0, -0.139626, 0.340339, 0.0, -0.139626, -0.0785398]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("paint:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.5, 3.5, 4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("paint:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_l7hdw"]
 _data = {
 &"RESET": SubResource("Animation_efppl"),
-&"paint": SubResource("Animation_poonc")
+&"paint": SubResource("Animation_poonc"),
+&"zametka": SubResource("Animation_mnp4h")
 }
 
 [node name="core" type="Node2D"]
@@ -284,6 +375,11 @@ stream = ExtResource("5_6sogb")
 wait_time = 20.0
 autostart = true
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/fumo"]
+libraries = {
+&"": SubResource("AnimationLibrary_l7hdw")
+}
+
 [node name="art" type="Sprite2D" parent="CanvasLayer/fumo"]
 visible = false
 modulate = Color(1, 1, 1, 0)
@@ -292,17 +388,19 @@ scale = Vector2(1, -0.16)
 skew = 0.523599
 texture = ExtResource("8_fpp5w")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/fumo"]
-libraries = {
-&"": SubResource("AnimationLibrary_l7hdw")
-}
-
 [node name="paint" type="Sprite2D" parent="CanvasLayer/fumo"]
 visible = false
 modulate = Color(1, 1, 1, 0)
 position = Vector2(53, 39)
 scale = Vector2(0.7, 0.7)
 texture = ExtResource("7_v2s1a")
+
+[node name="zametka" type="Sprite2D" parent="CanvasLayer/fumo"]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(42, 47)
+scale = Vector2(0.504717, 0.522222)
+skew = 0.244346
+texture = ExtResource("6_ymtr0")
 
 [node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="CanvasLayer/fumo"]
 stream = ExtResource("8_in0ky")
@@ -324,6 +422,9 @@ stream = ExtResource("12_l7hdw")
 
 [node name="AudioStreamPlayer8" type="AudioStreamPlayer" parent="CanvasLayer/fumo"]
 stream = ExtResource("13_s7uu3")
+
+[node name="AudioStreamPlayer9" type="AudioStreamPlayer" parent="CanvasLayer/fumo"]
+stream = ExtResource("14_jlbvb")
 
 [node name="Label" type="Label" parent="CanvasLayer"]
 anchors_preset = 15

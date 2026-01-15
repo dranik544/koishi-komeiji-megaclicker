@@ -33,7 +33,7 @@ var images = [
 
 
 func _ready() -> void:
-	get_window().mouse_passthrough = false
+	get_window().mouse_passthrough = true
 	get_window().title = "BOOOOM!"
 	get_window().unfocusable = true
 	get_window().always_on_top = true

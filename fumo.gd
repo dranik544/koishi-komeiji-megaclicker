@@ -19,7 +19,8 @@ func apply_settings():
 	if Global.madness:
 		$Timer.wait_time = 3
 	else:
-		$Timer.wait_time = randf_range(10.0 + Global.timebeforeevent, 15.0 + Global.timebeforeevent * 1.25)
+		$Timer.wait_time = 2
+		#$Timer.wait_time = randf_range(10.0 + Global.timebeforeevent, 15.0 + Global.timebeforeevent * 1.25)
 	$Timer.start()
 
 func _ready():
@@ -85,13 +86,13 @@ func _on_timer_timeout() -> void:
 	isevent = true
 	var randomevent
 	if !Global.madness:
-		randomevent = randi_range(1, 10)
+		randomevent = randi_range(11, 11)
 	else:
 		if get_window().has_meta("copy") and get_window().get_meta("copy"):
 			var events = [1, 3, 4, 6, 7, 8, 9, 10]
 			randomevent = events[randi() % events.size()]
 		else:
-			randomevent = randi_range(1, 10)
+			randomevent = randi_range(1, 11)
 	
 	match randomevent:
 		1:
@@ -287,6 +288,24 @@ func _on_timer_timeout() -> void:
 					new_window.show()
 					
 					await get_tree().create_timer(randf_range(1.0, 7.5)).timeout
+		11:
+			$AnimationPlayer.play("zametka")
+			await $AnimationPlayer.animation_finished
+			
+			var new_window = Window.new()
+			new_window.size = Vector2i(225, 225)
+			new_window.borderless = true
+			new_window.always_on_top = true
+			new_window.unfocusable = true
+			new_window.position = get_window().position
+			
+			get_tree().root.add_child(new_window)
+			var question = load("res://zametka.tscn").instantiate()
+			new_window.add_child(question)
+			
+			$AudioStreamPlayer9.play()
+			
+			new_window.show()
 	
 	if Global.madness: $Timer.wait_time = randf_range(0.5, 5)
 	else: $Timer.wait_time = randf_range(10.0 + Global.timebeforeevent, 15.0 + Global.timebeforeevent * 1.25)
