@@ -16,10 +16,12 @@ func _ready() -> void:
 		get_window().transparent_bg = true
 		get_window().transparent = true
 		get_tree().get_root().set_transparent_background(true)
+		$CanvasLayer/bg.visible = false
 	elif !Global.transparentbg:
 		get_window().transparent_bg = false
 		get_window().transparent = false
 		get_tree().get_root().set_transparent_background(true)
+		$CanvasLayer/bg.visible = true
 	#get_tree().get_root().transparent_bg = true
 
 #func _process(delta: float) -> void:

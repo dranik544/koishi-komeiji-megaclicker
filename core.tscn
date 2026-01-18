@@ -1,8 +1,9 @@
-[gd_scene load_steps=22 format=3 uid="uid://ellvh0f4tp58"]
+[gd_scene load_steps=23 format=3 uid="uid://ellvh0f4tp58"]
 
 [ext_resource type="Script" uid="uid://bok8fheaeuima" path="res://core.gd" id="1_l5qv6"]
 [ext_resource type="Texture2D" uid="uid://cdjw0233vhmvt" path="res://fumo1.png" id="1_tvpqx"]
 [ext_resource type="Script" uid="uid://dwawq542dwngx" path="res://fumo.gd" id="2_05t4c"]
+[ext_resource type="Texture2D" uid="uid://dg0fj3q4r3jjd" path="res://bg2.png" id="2_mnp4h"]
 [ext_resource type="AudioStream" uid="uid://r3e4mmxyihrr" path="res://run.mp3" id="5_6sogb"]
 [ext_resource type="Script" uid="uid://cvh32xotqvxd2" path="res://counter.gd" id="5_nji8p"]
 [ext_resource type="Script" uid="uid://daktv33rfrvke" path="res://button.gd" id="6_macrm"]
@@ -340,6 +341,15 @@ _data = {
 script = ExtResource("1_l5qv6")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="bg" type="TextureRect" parent="CanvasLayer"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_mnp4h")
 
 [node name="fumo" type="StaticBody2D" parent="CanvasLayer"]
 position = Vector2(112, 112)

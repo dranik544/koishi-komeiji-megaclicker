@@ -89,7 +89,7 @@ func _on_timer_timeout() -> void:
 		randomevent = randi_range(1, 11)
 	else:
 		if get_window().has_meta("copy") and get_window().get_meta("copy"):
-			var events = [1, 3, 4, 6, 7, 8, 9, 10]
+			var events = [1, 3, 4, 6, 7, 9, 10]
 			randomevent = events[randi() % events.size()]
 		else:
 			randomevent = randi_range(1, 11)
@@ -274,6 +274,8 @@ func _on_timer_timeout() -> void:
 			if Global.annoyingevents:
 				$AudioStreamPlayer8.play()
 				
+				if Global.madness: updateeventtimer()
+				
 				for i in randi_range(8, 15):
 					var new_window = Window.new()
 					new_window.size = Vector2i(randi_range(100, 550) * 1.5, randi_range(100, 550))
@@ -307,6 +309,9 @@ func _on_timer_timeout() -> void:
 			
 			new_window.show()
 	
+	updateeventtimer()
+
+func updateeventtimer():
 	if Global.madness: $Timer.wait_time = randf_range(0.5, 5)
 	else: $Timer.wait_time = randf_range(10.0 + Global.timebeforeevent, 15.0 + Global.timebeforeevent * 1.25)
 	$Timer.start()

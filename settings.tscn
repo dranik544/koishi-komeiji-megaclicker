@@ -1,8 +1,42 @@
-[gd_scene load_steps=4 format=3 uid="uid://b8l2mipxeicdn"]
+[gd_scene load_steps=11 format=3 uid="uid://b8l2mipxeicdn"]
 
 [ext_resource type="Script" uid="uid://cagi1ysst26ce" path="res://settings.gd" id="1_x2hje"]
+[ext_resource type="Texture2D" uid="uid://dg0fj3q4r3jjd" path="res://bg2.png" id="2_cj1lu"]
 [ext_resource type="Texture2D" uid="uid://cdjw0233vhmvt" path="res://fumo1.png" id="2_nkug2"]
 [ext_resource type="AudioStream" uid="uid://vryga3kdpgyi" path="res://evil hahaha.mp3" id="3_3ykye"]
+[ext_resource type="Texture2D" uid="uid://cuxn4paqy50uj" path="res://effect2.png" id="3_cj1lu"]
+
+[sub_resource type="Curve" id="Curve_cj1lu"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.399441, 1), 0.0, 0.0, 0, 0, Vector2(0.600559, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_3j6r5"]
+curve = SubResource("Curve_cj1lu")
+
+[sub_resource type="Curve" id="Curve_3lj6o"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.136872, 1), 0.76855, 0.76855, 0, 0, Vector2(0.857542, 1), -0.522374, -0.522374, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_71mqq"]
+curve = SubResource("Curve_3lj6o")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_71mqq"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(225, 225, 225)
+spread = 180.0
+initial_velocity_min = -180.0
+initial_velocity_max = 180.0
+angular_velocity_min = -120.0
+angular_velocity_max = 120.0
+radial_velocity_min = -25.0
+radial_velocity_max = 25.0
+gravity = Vector3(0, 189, 0)
+scale_min = 0.5
+scale_max = 1.5
+scale_curve = SubResource("CurveTexture_71mqq")
+color = Color(1, 1, 1, 0.784314)
+alpha_curve = SubResource("CurveTexture_3j6r5")
 
 [node name="settings" type="Control"]
 layout_mode = 3
@@ -13,20 +47,33 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_x2hje")
 
-[node name="bg" type="ColorRect" parent="."]
+[node name="bg" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.168627, 0.219608, 0.168627, 1)
+texture = ExtResource("2_cj1lu")
+expand_mode = 1
+
+[node name="particles" type="GPUParticles2D" parent="."]
+position = Vector2(125, 125)
+emitting = false
+amount = 32
+texture = ExtResource("3_cj1lu")
+lifetime = 0.6
+process_material = SubResource("ParticleProcessMaterial_71mqq")
 
 [node name="scroll" type="ScrollContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = -3.0
+offset_bottom = -3.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -37,6 +84,7 @@ size_flags_vertical = 3
 
 [node name="ver" type="RichTextLabel" parent="scroll/vbox"]
 layout_mode = 2
+theme_override_constants/outline_size = 4
 bbcode_enabled = true
 text = "
 [tornado]KOISHI MEGACLIKER
@@ -46,38 +94,54 @@ text = "
 fit_content = true
 horizontal_alignment = 1
 
+[node name="texturefilter" type="OptionButton" parent="scroll/vbox"]
+visible = false
+layout_mode = 2
+theme_override_constants/outline_size = 4
+selected = 0
+item_count = 2
+popup/item_0/text = "Linear filter"
+popup/item_0/id = 0
+popup/item_1/text = "Nearest filter"
+popup/item_1/id = 1
+
 [node name="timebeforeeventstext" type="RichTextLabel" parent="scroll/vbox"]
 layout_mode = 2
+theme_override_constants/outline_size = 4
 bbcode_enabled = true
 text = "Time before event: ???"
 fit_content = true
 
 [node name="timebeforeevents" type="HSlider" parent="scroll/vbox"]
 layout_mode = 2
-max_value = 820.0
+max_value = 2120.0
 step = 0.1
-value = 240.0
+value = 124.0
 
 [node name="annoyingevents" type="CheckButton" parent="scroll/vbox"]
 layout_mode = 2
+theme_override_constants/outline_size = 4
 theme_override_font_sizes/font_size = 15
 button_pressed = true
 text = "Enable annoying events"
 
 [node name="madness" type="CheckButton" parent="scroll/vbox"]
 layout_mode = 2
+theme_override_constants/outline_size = 4
 theme_override_font_sizes/font_size = 15
 text = "MADNESS AND CHAOS
 (please dont turn on)"
 
 [node name="transparent" type="CheckButton" parent="scroll/vbox"]
 layout_mode = 2
+theme_override_constants/outline_size = 4
 theme_override_font_sizes/font_size = 15
 button_pressed = true
 text = "Transparent BG"
 
 [node name="customfumo" type="CheckButton" parent="scroll/vbox"]
 layout_mode = 2
+theme_override_constants/outline_size = 4
 theme_override_font_sizes/font_size = 15
 text = "Enable custom Fumo"
 icon_alignment = 2
@@ -85,10 +149,12 @@ expand_icon = true
 
 [node name="opencustomfumodir" type="Button" parent="scroll/vbox"]
 layout_mode = 2
+theme_override_constants/outline_size = 4
 text = "Open custom fumo dir"
 
 [node name="fumopath" type="RichTextLabel" parent="scroll/vbox"]
 layout_mode = 2
+theme_override_constants/outline_size = 4
 bbcode_enabled = true
 text = "status custom fumo"
 fit_content = true
@@ -100,6 +166,7 @@ expand_mode = 4
 
 [node name="hi" type="RichTextLabel" parent="scroll/vbox"]
 layout_mode = 2
+theme_override_constants/outline_size = 4
 bbcode_enabled = true
 text = "[shake][wave][rainbow]hi lol
 
@@ -113,17 +180,22 @@ anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -31.0
+offset_left = 3.0
+offset_top = -34.0
+offset_right = -14.0
+offset_bottom = -3.0
 grow_horizontal = 2
 grow_vertical = 0
 
 [node name="exit" type="Button" parent="hbox"]
 layout_mode = 2
+theme_override_constants/outline_size = 4
 text = "Exit"
 
 [node name="continue" type="Button" parent="hbox"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_constants/outline_size = 4
 text = "Continue"
 
 [node name="MUHAHAHAHAH" type="AudioStreamPlayer" parent="."]
