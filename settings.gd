@@ -1,6 +1,8 @@
 extends Control
 
 func _ready() -> void:
+	loadsettings()
+	
 	get_window().size = Vector2i(300, 375)
 	get_window().position = Vector2i(
 		DisplayServer.screen_get_size().x / 2 - get_window().size.x / 2,
@@ -25,25 +27,25 @@ func _ready() -> void:
 	$scroll/vbox/customfumo.toggled.connect(_on_custom_fumo_toggled)
 	$scroll/vbox/opencustomfumodir.pressed.connect(_on_open_dir_pressed)
 	$scroll/vbox/timebeforeevents.value_changed.connect(_on_timebeforeevents_value_changed)
-	#$scroll/vbox/texturefilter.item_selected.connect(_on_filtertexture_item_selected)
+	$scroll/vbox/texturefilter.item_selected.connect(_on_filtertexture_item_selected)
 	
 	$scroll/vbox/fumopath.text = ""
-	_on_timebeforeevents_value_changed($scroll/vbox/timebeforeevents.value)
 	
 	updateglobal()
 
 func updateglobal():
 	if Global:
-		$scroll/vbox/annoyingevents.button_pressed = Global.annoyingevents
-		$scroll/vbox/madness.button_pressed = Global.madness
-		$scroll/vbox/annoyingevents.disabled = Global.madness
-		$scroll/vbox/customfumo.button_pressed = Global.customfumo
+		$scroll/vbox/annoyingevents.button_pressed = Global.settings["annoyingevents"]
+		$scroll/vbox/madness.button_pressed = Global.settings["madness"]
+		$scroll/vbox/annoyingevents.disabled = Global.settings["madness"]
+		$scroll/vbox/customfumo.button_pressed = Global.settings["customfumo"]
+		$scroll/vbox/timebeforeevents.value = Global.settings["timebeforeevent"]
 
 func _on_annoyingevents_toggled(toggled_on: bool) -> void:
-	Global.annoyingevents = toggled_on
+	Global.settings["annoyingevents"] = toggled_on
 
 func _on_madness_toggled(toggled_on: bool) -> void:
-	Global.madness = toggled_on
+	Global.settings["madness"] = toggled_on
 	$scroll/vbox/annoyingevents.disabled = toggled_on
 	$scroll/vbox/timebeforeevents.editable = not toggled_on
 	
@@ -67,21 +69,21 @@ func _on_madness_toggled(toggled_on: bool) -> void:
 		muhahawindow.add_child(muhaha)
 		
 		$MUHAHAHAHAH.play()
-		Global.annoyingevents = true
+		Global.settings["annoyingevents"] = true
 		$scroll/vbox/annoyingevents.button_pressed = true
 
 func _on_transparent_bg_toggled(toggled_on: bool):
-	Global.transparentbg = toggled_on
+	Global.settings["transparentbg"] = toggled_on
 
 func _on_custom_fumo_toggled(toggled_on: bool):
 	if toggled_on:
 		if Global.loadcustomfumo() != null:
-			Global.customfumo = true
+			Global.settings["customfumo"] = true
 			$"scroll/vbox/koishi lol".texture = Global.loadcustomfumo()
 			$"scroll/vbox/koishi lol".size = Vector2(220, 220)
 			$scroll/vbox/fumopath.text = "[wave]custom fumo found![/wave]"
 		else:
-			Global.customfumo = false
+			Global.settings["customfumo"] = false
 			$scroll/vbox/customfumo.button_pressed = false
 			$scroll/vbox/fumopath.text = "[shake]custom fumo not found...[/shake]
 			path to custom fumo windows:
@@ -90,21 +92,48 @@ func _on_custom_fumo_toggled(toggled_on: bool):
 			path to custom fumo linux:
 			~/.local/share/godot/app_userdata/Koishi Komeiji MEGACLICKER/customfumo.png"
 	else:
-		Global.customfumo = false
+		Global.settings["customfumo"] = false
 
 func _on_timebeforeevents_value_changed(value: float):
 	$scroll/vbox/timebeforeeventstext.text = "Time before events: ~" + str(value + (10 + 15 + value * 1.25) / 2) + "sec"
-	Global.timebeforeevent = value
+	Global.settings["timebeforeevent"] = value
 
 func _on_open_dir_pressed():
 	OS.shell_open(OS.get_user_data_dir())
 
-#func _on_filtertexture_item_selected(index: int):
-	#ProjectSettings.set_setting("rendering/textures/canvas_textures/default_texture_filter", index)
-	#ProjectSettings.save()
+func _on_filtertexture_item_selected(index: int):
+	match index:
+		0:
+			get_tree().root.content_scale_mode = Window.CONTENT_SCALE_MODE_DISABLED
+		1:
+			get_tree().root.content_scale_mode = Window.CONTENT_SCALE_MODE_VIEWPORT
+
+
+
+
+
 
 func _on_exit_pressed() -> void:
+	savesettings()
 	get_tree().quit()
 
 func _on_continue_pressed() -> void:
+	savesettings()
 	get_tree().change_scene_to_file("res://core.tscn")
+
+
+
+
+
+
+func savesettings():
+	var file = FileAccess.open("user://settings.sdb", FileAccess.WRITE)
+	file.store_var(Global.settings)
+
+func loadsettings():
+	var file = FileAccess.open("user://settings.sdb", FileAccess.READ)
+	
+	if file == null:
+		savesettings()
+		return
+	Global.settings = file.get_var()

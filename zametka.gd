@@ -63,11 +63,11 @@ func _ready() -> void:
 	get_window().unfocusable = true
 	get_window().always_on_top = true
 	
-	if Global.transparentbg:
+	if Global.settings["transparentbg"]:
 		get_window().transparent_bg = true
 		get_window().transparent = true
 		get_tree().get_root().set_transparent_background(true)
-	elif !Global.transparentbg:
+	elif !Global.settings["transparentbg"]:
 		get_window().transparent_bg = false
 		get_window().transparent = false
 		get_tree().get_root().set_transparent_background(true)

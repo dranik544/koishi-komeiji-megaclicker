@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://ellvh0f4tp58"]
+[gd_scene load_steps=29 format=3 uid="uid://ellvh0f4tp58"]
 
 [ext_resource type="Script" uid="uid://bok8fheaeuima" path="res://core.gd" id="1_l5qv6"]
 [ext_resource type="Texture2D" uid="uid://cdjw0233vhmvt" path="res://fumo1.png" id="1_tvpqx"]
@@ -18,6 +18,7 @@
 [ext_resource type="AudioStream" uid="uid://bxai8p2gw4n5n" path="res://baby-laughing-meme.mp3" id="12_l7hdw"]
 [ext_resource type="AudioStream" uid="uid://br3nxf1s52fyn" path="res://fart1.mp3" id="13_s7uu3"]
 [ext_resource type="AudioStream" uid="uid://b56wpii3e8wja" path="res://zametka.mp3" id="14_jlbvb"]
+[ext_resource type="Texture2D" uid="uid://cuxn4paqy50uj" path="res://effect2.png" id="19_mqiab"]
 
 [sub_resource type="Animation" id="Animation_efppl"]
 length = 0.001
@@ -337,6 +338,34 @@ _data = {
 &"zametka": SubResource("Animation_mnp4h")
 }
 
+[sub_resource type="Curve" id="Curve_mqiab"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_d1gq7"]
+curve = SubResource("Curve_mqiab")
+
+[sub_resource type="Curve" id="Curve_d1gq7"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_fcxkh"]
+curve = SubResource("Curve_d1gq7")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_mnp4h"]
+emission_shape = 1
+emission_sphere_radius = 20.0
+angle_min = -25.0
+angle_max = 25.0
+direction = Vector3(0, 0, 0)
+initial_velocity_min = -5.0
+initial_velocity_max = 102.45
+gravity = Vector3(0, 0, 0)
+scale_min = 0.8
+scale_max = 1.2
+scale_curve = SubResource("CurveTexture_fcxkh")
+alpha_curve = SubResource("CurveTexture_d1gq7")
+
 [node name="core" type="Node2D"]
 script = ExtResource("1_l5qv6")
 
@@ -357,19 +386,33 @@ script = ExtResource("2_05t4c")
 
 [node name="fumospritebg" type="TextureRect" parent="CanvasLayer/fumo"]
 modulate = Color(0, 0, 0, 0.490196)
-offset_left = -106.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -111.0
 offset_top = -90.0
-offset_right = 94.0
+offset_right = 89.0
 offset_bottom = 110.0
+grow_horizontal = 2
+grow_vertical = 2
 pivot_offset = Vector2(100, 100)
 texture = ExtResource("1_tvpqx")
 expand_mode = 1
 
 [node name="fumosprite" type="TextureRect" parent="CanvasLayer/fumo"]
-offset_left = -96.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
 offset_top = -100.0
-offset_right = 104.0
+offset_right = 100.0
 offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
 pivot_offset = Vector2(100, 100)
 texture = ExtResource("1_tvpqx")
 expand_mode = 1
@@ -476,6 +519,15 @@ text = "I NEED
 10 CLICKS"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="clickeffect" type="GPUParticles2D" parent="."]
+emitting = false
+texture = ExtResource("19_mqiab")
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+fixed_fps = 15
+process_material = SubResource("ParticleProcessMaterial_mnp4h")
 
 [connection signal="timeout" from="CanvasLayer/fumo/Timer" to="CanvasLayer/fumo" method="_on_timer_timeout"]
 [connection signal="pressed" from="CanvasLayer/Button" to="CanvasLayer/Button" method="_on_pressed"]

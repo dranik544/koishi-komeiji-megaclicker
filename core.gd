@@ -12,12 +12,12 @@ func _ready() -> void:
 		DisplayServer.screen_get_size().y / 2 - get_window().size.y / 2
 	)
 	
-	if Global.transparentbg:
+	if Global.settings["transparentbg"]:
 		get_window().transparent_bg = true
 		get_window().transparent = true
 		get_tree().get_root().set_transparent_background(true)
 		$CanvasLayer/bg.visible = false
-	elif !Global.transparentbg:
+	elif !Global.settings["transparentbg"]:
 		get_window().transparent_bg = false
 		get_window().transparent = false
 		get_tree().get_root().set_transparent_background(true)

@@ -12,15 +12,15 @@ var clicksreached: bool = false
 
 
 func apply_settings():
-	if Global.hascustomfumo() != null and Global.customfumo:
+	if Global.hascustomfumo() != null and Global.settings["customfumo"]:
 		$fumospritebg.texture = Global.loadcustomfumo()
 		$fumosprite.texture = Global.loadcustomfumo()
 	
-	if Global.madness:
+	if Global.settings["madness"]:
 		$Timer.wait_time = 3
 	else:
 		#$Timer.wait_time = 2
-		$Timer.wait_time = randf_range(10.0 + Global.timebeforeevent, 15.0 + Global.timebeforeevent * 1.25)
+		$Timer.wait_time = randf_range(10.0 + Global.settings["timebeforeevent"], 15.0 + Global.settings["timebeforeevent"] * 1.25)
 	$Timer.start()
 
 func _ready():
@@ -51,6 +51,20 @@ func _process(delta: float) -> void:
 		var wpos = get_window().position
 		dragoffset = Vector2(mpos) - Vector2(wpos)
 		Global.addpoint.emit(1)
+		
+		var tween = create_tween().set_parallel(true)
+		tween.set_ease(Tween.EASE_IN)
+		tween.set_trans(Tween.TRANS_QUAD)
+		tween.tween_property($fumosprite, "scale", Vector2(0.85, 0.85), 0.04)
+		tween.tween_property($fumospritebg, "scale", Vector2(0.85, 0.85), 0.04)
+		
+		await tween.finished
+		
+		var returntween = create_tween()
+		returntween.set_ease(Tween.EASE_OUT)
+		returntween.set_trans(Tween.TRANS_SINE)
+		returntween.tween_property($fumosprite, "scale", Vector2(1.0, 1.0), 0.1)
+		returntween.parallel().tween_property($fumospritebg, "scale", Vector2(1.0, 1.0), 0.1)
 	
 	
 	
@@ -85,7 +99,7 @@ func _on_timer_timeout() -> void:
 	
 	isevent = true
 	var randomevent
-	if !Global.madness:
+	if !Global.settings["madness"]:
 		randomevent = randi_range(1, 11)
 	else:
 		if get_window().has_meta("copy") and get_window().get_meta("copy"):
@@ -155,7 +169,7 @@ func _on_timer_timeout() -> void:
 			$AudioStreamPlayer5.play()
 			
 		5:
-			if Global.annoyingevents:
+			if Global.settings["annoyingevents"]:
 				clicks = 0
 				clicksreached = false
 				eventdrag = true
@@ -184,7 +198,7 @@ func _on_timer_timeout() -> void:
 			var targetpos = get_window().position + Vector2i(randi_range(-500, 500), randi_range(-500, 500))
 			create_tween().tween_property(new_window, "position", targetpos, 0.2)
 			
-			if !Global.madness:
+			if !Global.settings["madness"]:
 				await get_tree().create_timer(randf_range(5, 15)).timeout
 				var targetjumppos = Vector2i(new_window.position.x, -225)
 				create_tween().tween_property(new_window, "position", targetjumppos, 0.75)
@@ -193,7 +207,7 @@ func _on_timer_timeout() -> void:
 				await get_tree().create_timer(0.8).timeout
 				new_window.queue_free()
 		7:
-			if Global.annoyingevents:
+			if Global.settings["annoyingevents"]:
 				var new_window = Window.new()
 				new_window.size = Vector2i(225, 225)
 				new_window.borderless = true
@@ -227,7 +241,7 @@ func _on_timer_timeout() -> void:
 				$fumosprite.scale = Vector2(1.0, 1.0)
 				$fumospritebg.scale = $fumosprite.scale
 		8:
-			if Global.annoyingevents:
+			if Global.settings["annoyingevents"]:
 				var new_window = Window.new()
 				new_window.size = Vector2i(DisplayServer.screen_get_size())
 				new_window.borderless = false
@@ -247,7 +261,7 @@ func _on_timer_timeout() -> void:
 				await get_tree().create_timer(0.2).timeout
 				new_window.queue_free()
 		9:
-			if Global.annoyingevents:
+			if Global.settings["annoyingevents"]:
 				var whaticangoogle = [
 					"https://www.google.com/search?q=how+to+poop",
 					"https://www.google.com/search?q=how+buy+original+fumo",
@@ -271,10 +285,10 @@ func _on_timer_timeout() -> void:
 				
 				OS.shell_open(whaticangoogle[randi() % whaticangoogle.size()])
 		10:
-			if Global.annoyingevents:
+			if Global.settings["annoyingevents"]:
 				$AudioStreamPlayer8.play()
 				
-				if Global.madness: updateeventtimer()
+				if Global.settings["madness"]: updateeventtimer()
 				
 				for i in randi_range(8, 15):
 					var new_window = Window.new()
@@ -312,8 +326,8 @@ func _on_timer_timeout() -> void:
 	updateeventtimer()
 
 func updateeventtimer():
-	if Global.madness: $Timer.wait_time = randf_range(0.5, 5)
-	else: $Timer.wait_time = randf_range(10.0 + Global.timebeforeevent, 15.0 + Global.timebeforeevent * 1.25)
+	if Global.settings["madness"]: $Timer.wait_time = randf_range(0.5, 5)
+	else: $Timer.wait_time = randf_range(10.0 + Global.settings["timebeforeevent"], 15.0 + Global.settings["timebeforeevent"] * 1.25)
 	$Timer.start()
 	
 	isevent = false

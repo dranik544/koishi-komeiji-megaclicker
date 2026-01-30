@@ -87,8 +87,8 @@ layout_mode = 2
 theme_override_constants/outline_size = 4
 bbcode_enabled = true
 text = "
-[tornado]KOISHI MEGACLIKER
-[shake]ver13
+[tornado][font size=24]KOISHI MEGACLIKER
+[shake][font size=14]ver15
 
 "
 fit_content = true
