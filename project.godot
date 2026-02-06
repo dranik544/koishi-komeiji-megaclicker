@@ -15,7 +15,9 @@ config/version="1.0.0.0"
 config/tags=PackedStringArray("2d", "desktoppet", "dranik544", "touhou")
 run/main_scene="uid://b8l2mipxeicdn"
 config/features=PackedStringArray("4.4", "Forward Plus")
+boot_splash/image="uid://do400maisjdhr"
 config/icon="uid://cdjw0233vhmvt"
+boot_splash/minimum_display_time=100
 
 [autoload]
 

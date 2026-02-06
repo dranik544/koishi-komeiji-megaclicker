@@ -94,7 +94,7 @@ func _process(delta: float) -> void:
 	$"../ineed10clicks".visible = eventdrag and clicks < 10
 
 func _on_timer_timeout() -> void:
-	if isevent: 
+	if isevent or Global.settings["disableevents"]: 
 		return
 	
 	isevent = true
@@ -196,7 +196,10 @@ func _on_timer_timeout() -> void:
 			new_window.show()
 			
 			var targetpos = get_window().position + Vector2i(randi_range(-500, 500), randi_range(-500, 500))
-			create_tween().tween_property(new_window, "position", targetpos, 0.2)
+			var tween = create_tween()
+			tween.set_ease(Tween.EASE_OUT)
+			tween.set_trans(Tween.TRANS_ELASTIC)
+			tween.tween_property(new_window, "position", targetpos, 0.2)
 			
 			if !Global.settings["madness"]:
 				await get_tree().create_timer(randf_range(5, 15)).timeout

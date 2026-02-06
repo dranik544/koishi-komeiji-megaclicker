@@ -28,6 +28,7 @@ func _ready() -> void:
 	$scroll/vbox/opencustomfumodir.pressed.connect(_on_open_dir_pressed)
 	$scroll/vbox/timebeforeevents.value_changed.connect(_on_timebeforeevents_value_changed)
 	$scroll/vbox/texturefilter.item_selected.connect(_on_filtertexture_item_selected)
+	$scroll/vbox/disableevents.toggled.connect(_on_disable_events_toggled)
 	
 	$scroll/vbox/fumopath.text = ""
 	
@@ -48,6 +49,7 @@ func _on_madness_toggled(toggled_on: bool) -> void:
 	Global.settings["madness"] = toggled_on
 	$scroll/vbox/annoyingevents.disabled = toggled_on
 	$scroll/vbox/timebeforeevents.editable = not toggled_on
+	$scroll/vbox/disableevents.disabled = toggled_on
 	
 	if toggled_on:
 		var muhahawindow = Window.new()
@@ -98,6 +100,19 @@ func _on_timebeforeevents_value_changed(value: float):
 	$scroll/vbox/timebeforeeventstext.text = "Time before events: ~" + str(value + (10 + 15 + value * 1.25) / 2) + "sec"
 	Global.settings["timebeforeevent"] = value
 
+func _on_disable_events_toggled(toggle: bool):
+	Global.settings["disablevents"] = toggle
+	if toggle:
+		$scroll/vbox/annoyingevents.disabled = true
+		$scroll/vbox/annoyingevents.button_pressed = false
+		$scroll/vbox/madness.disabled = true
+		$scroll/vbox/madness.button_pressed = false
+		$scroll/vbox/timebeforeevents.editable = false
+	else:
+		$scroll/vbox/annoyingevents.disabled = false
+		$scroll/vbox/madness.disabled = false
+		$scroll/vbox/timebeforeevents.editable = true
+
 func _on_open_dir_pressed():
 	OS.shell_open(OS.get_user_data_dir())
 
@@ -127,13 +142,21 @@ func _on_continue_pressed() -> void:
 
 
 func savesettings():
+	### ВРЕМЕННОЕ РЕШЕНИЕ
+	return
+	
 	var file = FileAccess.open("user://settings.sdb", FileAccess.WRITE)
 	file.store_var(Global.settings)
+	file = null
 
 func loadsettings():
+	### ВРЕМЕННОЕ РЕШЕНИЕ
+	return
+	
 	var file = FileAccess.open("user://settings.sdb", FileAccess.READ)
 	
-	if file == null:
+	if file == null or file.get_var().size() != Global.settings.size():
 		savesettings()
 		return
+	
 	Global.settings = file.get_var()

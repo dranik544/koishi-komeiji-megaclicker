@@ -11,7 +11,8 @@ var settings = {
 	"madness": false,
 	"transparentbg": true,
 	"customfumo": false,
-	"timebeforeevent": 240.0
+	"timebeforeevent": 240.0,
+	"disableevents": false,
 }
 
 
