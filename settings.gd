@@ -29,6 +29,7 @@ func _ready() -> void:
 	$scroll/vbox/timebeforeevents.value_changed.connect(_on_timebeforeevents_value_changed)
 	$scroll/vbox/texturefilter.item_selected.connect(_on_filtertexture_item_selected)
 	$scroll/vbox/disableevents.toggled.connect(_on_disable_events_toggled)
+	$scroll/vbox/disableclicks.toggled.connect(_on_disable_clicks_toggled)
 	
 	$scroll/vbox/fumopath.text = ""
 	
@@ -123,6 +124,10 @@ func _on_filtertexture_item_selected(index: int):
 		1:
 			get_tree().root.content_scale_mode = Window.CONTENT_SCALE_MODE_VIEWPORT
 
+
+func _on_disable_clicks_toggled(toggle: bool):
+	Global.settings["disableclicks"] = toggle
+	print(Global.settings["disableclicks"])
 
 
 

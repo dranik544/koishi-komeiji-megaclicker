@@ -13,6 +13,7 @@ var settings = {
 	"customfumo": false,
 	"timebeforeevent": 240.0,
 	"disableevents": false,
+	"disableclicks": false
 }
 
 

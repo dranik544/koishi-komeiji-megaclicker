@@ -12,6 +12,8 @@ var clicksreached: bool = false
 
 
 func apply_settings():
+	$"../Label".visible = !Global.settings["disableclicks"]
+	
 	if Global.hascustomfumo() != null and Global.settings["customfumo"]:
 		$fumospritebg.texture = Global.loadcustomfumo()
 		$fumosprite.texture = Global.loadcustomfumo()
@@ -50,25 +52,27 @@ func _process(delta: float) -> void:
 		var mpos = DisplayServer.mouse_get_position()
 		var wpos = get_window().position
 		dragoffset = Vector2(mpos) - Vector2(wpos)
-		Global.addpoint.emit(1)
 		
-		var tween = create_tween().set_parallel(true)
-		tween.set_ease(Tween.EASE_IN)
-		tween.set_trans(Tween.TRANS_QUAD)
-		tween.tween_property($fumosprite, "scale", Vector2(0.85, 0.85), 0.04)
-		tween.tween_property($fumospritebg, "scale", Vector2(0.85, 0.85), 0.04)
-		
-		await tween.finished
-		
-		var returntween = create_tween()
-		returntween.set_ease(Tween.EASE_OUT)
-		returntween.set_trans(Tween.TRANS_SINE)
-		returntween.tween_property($fumosprite, "scale", Vector2(1.0, 1.0), 0.1)
-		returntween.parallel().tween_property($fumospritebg, "scale", Vector2(1.0, 1.0), 0.1)
+		if !Global.settings["disableclicks"]:
+			Global.addpoint.emit(1)
+			
+			var tween = create_tween().set_parallel(true)
+			tween.set_ease(Tween.EASE_IN)
+			tween.set_trans(Tween.TRANS_QUAD)
+			tween.tween_property($fumosprite, "scale", Vector2(0.85, 0.85), 0.04)
+			tween.tween_property($fumospritebg, "scale", Vector2(0.85, 0.85), 0.04)
+			
+			await tween.finished
+			
+			var returntween = create_tween()
+			returntween.set_ease(Tween.EASE_OUT)
+			returntween.set_trans(Tween.TRANS_SINE)
+			returntween.tween_property($fumosprite, "scale", Vector2(1.0, 1.0), 0.1)
+			returntween.parallel().tween_property($fumospritebg, "scale", Vector2(1.0, 1.0), 0.1)
 	
 	
 	
-	if Input.is_action_just_pressed("RCM"): Global.savepoints(); get_tree().quit()
+	if Input.is_action_just_pressed("CLOSE"): Global.savepoints(); get_tree().quit()
 	
 	
 	
@@ -85,7 +89,7 @@ func _process(delta: float) -> void:
 			get_window().position = Vector2i(Vector2(mpos - windowsize / 2))
 		rotation = lerp(rotation, mousemotion.x / 10, 5 * delta)
 	
-	rotation = lerp(rotation, 0.0, 10 * delta)
+	rotation = lerp(rotation, 0.0, 7 * delta)
 	
 	if run:
 		$fumosprite.scale = Vector2(1.0, 1.0) + Vector2(sin(time * 10) * 0.05, sin(time * 20) * 0.05)
@@ -94,8 +98,7 @@ func _process(delta: float) -> void:
 	$"../ineed10clicks".visible = eventdrag and clicks < 10
 
 func _on_timer_timeout() -> void:
-	if isevent or Global.settings["disableevents"]: 
-		return
+	if isevent or Global.settings["disableevents"]: return
 	
 	isevent = true
 	var randomevent
@@ -169,7 +172,7 @@ func _on_timer_timeout() -> void:
 			$AudioStreamPlayer5.play()
 			
 		5:
-			if Global.settings["annoyingevents"]:
+			if Global.settings["annoyingevents"] and !Global.settings["disableclicks"]:
 				clicks = 0
 				clicksreached = false
 				eventdrag = true
